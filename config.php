@@ -24,6 +24,15 @@ try {
 //   return $count;
 // }
 
+// Count any Column Value from Profile Table
+function teacharCount($col, $val) {
+  global $pdo;
+  $stm=$pdo->prepare("SELECT $col FROM teachers WHERE $col=?");
+  $stm->execute(array($val));
+  $count = $stm->rowCount();
+  return $count;
+}
+
 // GET Student Data
 // function student($col,$id){
 //   global $pdo;

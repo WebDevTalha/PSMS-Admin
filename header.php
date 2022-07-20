@@ -23,6 +23,7 @@ $admin_name = admin('name',$user_id);
   <title>Admin Dashboard</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="css/jquery.data_tables.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- inject:css -->
@@ -229,8 +230,8 @@ $admin_name = admin('name',$user_id);
             </a>
             <div class="collapse" id="ui-2">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">All Teachers</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Search</a></li>
+                <li class="nav-item"> <a class="nav-link" href="teacher_all.php">All Teachers</a></li>
+                <li class="nav-item"> <a class="nav-link" href="teacher_add_new.php">Add New</a></li>
               </ul>
             </div>
           </li>
