@@ -52,8 +52,16 @@ $admin_name = admin('name',$user_id);
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item" href="#">
-                <i class="mdi mdi-cached mr-2 text-success"></i>
-                Activity Log
+                <i class="mdi mdi-account-circle mr-2 text-success"></i>
+                Set profile Picture
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="mdi mdi-settings mr-2 text-success"></i>
+                Settings
+              </a>
+              <a class="dropdown-item" href="change_password.php">
+                <i class="mdi mdi-lock mr-2 text-success"></i>
+                Change Password
               </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="logout.php">
@@ -155,59 +163,99 @@ $admin_name = admin('name',$user_id);
               <i class="mdi mdi-home menu-icon"></i>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-6" aria-expanded="false" aria-controls="ui-6">
+              <span class="menu-title">Class Routine</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-6">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="">Filter Routine</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Add New</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-5" aria-expanded="false" aria-controls="ui-5">
+              <span class="menu-title">Classes</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-5">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="">Create New Class</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">All Classes</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-4" aria-expanded="false" aria-controls="ui-4">
+              <span class="menu-title">Subjects</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-4">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="">New Subjects</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">All Subjects</a></li>
+              </ul>
+            </div>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-title">UI Elements</span>
+              <span class="menu-title">Students</span>
               <i class="menu-arrow"></i>
               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="error-404.php">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="error-404.php">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">All Students</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Search</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Results</a></li>
               </ul>
             </div>
           </li>
+
           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-2" aria-expanded="false" aria-controls="ui-2">
+              <span class="menu-title">Teachers</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-2">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="">All Teachers</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Search</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-3" aria-expanded="false" aria-controls="ui-3">
+              <span class="menu-title">Payments</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-3">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="">Student Payments</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Teacher Payments</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- <li class="nav-item">
             <a class="nav-link" href="error-404.php">
               <span class="menu-title">Icons</span>
               <i class="mdi mdi-contacts menu-icon"></i>
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="error-404.php">
-              <span class="menu-title">Forms</span>
-              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="error-404.php">
-              <span class="menu-title">Charts</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="error-404.php">
-              <span class="menu-title">Tables</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-              <span class="menu-title">Sample Pages</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-medical-bag menu-icon"></i>
-            </a>
-            <div class="collapse" id="general-pages">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="error-404.php"> Blank Page </a></li>
-                <li class="nav-item"> <a class="nav-link" href="error-404.php"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="error-404.php"> Register </a></li>
-                <li class="nav-item"> <a class="nav-link" href="error-404.php"> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="error-404.php"> 500 </a></li>
-              </ul>
-              </div>
-          </li>
+          </li> -->
+
         </ul>
       </nav>
       <!-- partial -->
