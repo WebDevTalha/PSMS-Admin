@@ -28,6 +28,41 @@ $admin_name = admin('name',$user_id);
   <!-- endinject -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/style.css">
+  
+<style>
+    .delete_popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    background: #fff;
+    padding: 45px 55px;
+    z-index: 99999;
+    display: none;
+}
+
+.delete_popup p {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.delete_popup span {
+    font-size: 13px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: none;
+}
+</style>
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
@@ -153,7 +188,7 @@ $admin_name = admin('name',$user_id);
               </div>
               <div class="nav-profile-text d-flex flex-column">
                 <span class="font-weight-bold mb-2"><?php echo $admin_name;?></span>
-                <span class="text-secondary text-small">Website Admin</span>
+                <span class="text-secondary text-small">PSMS Admin</span>
               </div>
               <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>
@@ -215,7 +250,7 @@ $admin_name = admin('name',$user_id);
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">All Students</a></li>
+                <li class="nav-item"> <a class="nav-link" href="student_all.php">All Students</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Search</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Results</a></li>
               </ul>

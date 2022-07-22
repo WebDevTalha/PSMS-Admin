@@ -14,6 +14,9 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
+            <?php if(isset($_GET['delete']) == 'success') :?>
+            <div class="alert alert-success">Teacher Data Delete Successfuly!</div>
+            <?php endif;?>
             <table class="table table-bordered" id="all_teachers_table">
             <thead>
                 <tr>
@@ -41,8 +44,11 @@
                     <td><?php echo $teacher['mobile'];?></td>
                     <td><?php echo $teacher['gender'];?></td>
                     <td>
-                        <a href="" class="btn btn-sm btn-warning"><i class="mdi mdi-table-edit"></i></a>&nbsp;&nbsp;
-                        <a href="" class="btn btn-sm btn-danger"><i class="mdi mdi-delete"></i></a>
+                        <a href="teacher_edit.php?id=<?php echo $teacher['id'];?>" title="Edit" class="btn btn-sm btn-warning"><i class="mdi mdi-table-edit"></i></a>&nbsp;&nbsp;
+
+                        <a href="teacher_view.php?id=<?php echo $teacher['id'];?>" title="View" class="btn btn-sm btn-success"><i class="mdi mdi-eye"></i></a>&nbsp;&nbsp;
+
+                        <a href="teacher_delete.php?id=<?php echo $teacher['id'];?>" title="Delete" onclick="return confirm('Are You Sure?')" class="btn btn-sm btn-danger delete-btn"><i class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>
                 <?php endforeach;?>
