@@ -236,8 +236,8 @@ $admin_name = admin('name',$user_id);
             </a>
             <div class="collapse" id="ui-4">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">New Subjects</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">All Subjects</a></li>
+                <li class="nav-item"> <a class="nav-link" href="subject_all.php">All Subjects</a></li>
+                <li class="nav-item"> <a class="nav-link" href="subject_add_new.php">Add New</a></li>
               </ul>
             </div>
           </li>

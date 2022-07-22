@@ -60,3 +60,12 @@ function teacherData($col,$id){
   $result = $stm->fetchAll(PDO::FETCH_ASSOC);
   return $result[0][$col];
 }
+
+// Count any Column Value count from any Table
+function getCount($tbl,$col, $val) {
+  global $pdo;
+  $stm=$pdo->prepare("SELECT $col FROM $tbl WHERE $col=?");
+  $stm->execute(array($val));
+  $count = $stm->rowCount();
+  return $count;
+}
