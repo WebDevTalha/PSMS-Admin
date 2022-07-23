@@ -222,8 +222,8 @@ $admin_name = admin('name',$user_id);
             </a>
             <div class="collapse" id="ui-5">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">Create New Class</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">All Classes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="class_all.php">All Classes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="class_add_new.php">Create New Class</a></li>
               </ul>
             </div>
           </li>
