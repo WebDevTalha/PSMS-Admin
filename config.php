@@ -78,3 +78,12 @@ function getCount($tbl,$col, $val) {
   $count = $stm->rowCount();
   return $count;
 }
+
+// GET any Data
+function getColData($col,$tbl,$id){
+  global $pdo;
+  $stm = $pdo->prepare("SELECT $col FROM $tbl WHERE id=?");
+  $stm->execute(array($id));
+  $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+  return $result[0][$col];
+}

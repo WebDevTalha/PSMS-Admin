@@ -267,6 +267,7 @@ $admin_name = admin('name',$user_id);
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="teacher_all.php">All Teachers</a></li>
                 <li class="nav-item"> <a class="nav-link" href="teacher_add_new.php">Add New</a></li>
+                <li class="nav-item"> <a class="nav-link" href="teacher_assign_subject.php">Assign Subject</a></li>
               </ul>
             </div>
           </li>
