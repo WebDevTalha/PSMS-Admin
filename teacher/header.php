@@ -204,7 +204,7 @@ $profile_photo = teacherData('profile_photo', $user_id);
             <div class="collapse" id="ui-5">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="attendance_new.php">New Attendance</a></li>
-                <li class="nav-item"> <a class="nav-link" href="attendance_all.php">Attendance History</a></li>
+                <li class="nav-item"> <a class="nav-link" href="attendance_history.php">Attendance History</a></li>
               </ul>
             </div>
           </li>
