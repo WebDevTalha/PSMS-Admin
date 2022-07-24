@@ -10,6 +10,8 @@ $user_id = $_SESSION['admin_loggedin'][0]['id'];
 
 $admin_name = admin('name',$user_id);
 
+$profile_photo = admin('profile_photo',$user_id);
+
 
 ?>
 
@@ -25,6 +27,8 @@ $admin_name = admin('name',$user_id);
   <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="css/jquery.data_tables.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <!-- Fontawsome css -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- endinject -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/style.css">
@@ -79,7 +83,11 @@ $admin_name = admin('name',$user_id);
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <div class="nav-profile-img">
-                <img src="images/faces/face1.jpg" alt="image">
+                <img src="<?php if($profile_photo == null){
+                                    echo 'images/uploads/user.png';
+                                } else {
+                                    echo $profile_photo;
+                                } ?>" alt="image">
                 <span class="availability-status online"></span>             
               </div>
               <div class="nav-profile-text">
@@ -87,7 +95,7 @@ $admin_name = admin('name',$user_id);
               </div>
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="change_profile_photo.php">
                 <i class="mdi mdi-account-circle mr-2 text-success"></i>
                 Set profile Picture
               </a>
@@ -183,7 +191,11 @@ $admin_name = admin('name',$user_id);
           <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img src="images/faces/face1.jpg" alt="profile">
+                <img src="<?php if($profile_photo == null){
+                                    echo 'images/uploads/user.png';
+                                } else {
+                                    echo $profile_photo;
+                                } ?>" alt="profile">
                 <span class="login-status online"></span> <!--change to offline or busy as needed-->              
               </div>
               <div class="nav-profile-text d-flex flex-column">
