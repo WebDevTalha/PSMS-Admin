@@ -7,7 +7,9 @@ $stm = $pdo->prepare("SELECT * FROM students WHERE id=?");
 $stm->execute(array($student_id));
 $student = $stm->fetchAll(PDO::FETCH_ASSOC);     
 
-
+$statement = $pdo->prepare("SELECT * FROM class WHERE id=?");
+$statement->execute(array($student[0]['current_class']));
+$get_class = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -78,7 +80,11 @@ $student = $stm->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                     <tr>
                         <td>Class</td>
-                        <td><?php echo $student[0]['current_class'];?></td>
+                        <td><?php if($student[0]['current_class'] != null){
+                                    echo $get_class[0]['class_name'];
+                                } else {
+                                    echo "No Class Registered!";
+                                } ?></td>
                     </tr>
                     <tr>
                         <td>Register Date</td>
