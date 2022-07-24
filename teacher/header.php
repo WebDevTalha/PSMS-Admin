@@ -171,30 +171,40 @@ $profile_photo = teacherData('profile_photo', $user_id);
             </a>
           </li>
 
+
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-6" aria-expanded="false" aria-controls="ui-6">
+            <a class="nav-link" href="class_routine.php">
               <span class="menu-title">Class Routine</span>
-              <i class="menu-arrow"></i>
               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             </a>
-            <div class="collapse" id="ui-6">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">Filter Routine</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Add New</a></li>
-              </ul>
-            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="assigned_class.php">
+              <span class="menu-title">Assigned Class</span>
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="assigned_subject.php">
+              <span class="menu-title">Assigned Subject</span>
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-5" aria-expanded="false" aria-controls="ui-5">
-              <span class="menu-title">Classes</span>
+              <span class="menu-title">Attendance</span>
               <i class="menu-arrow"></i>
               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             </a>
             <div class="collapse" id="ui-5">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">Create New Class</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">All Classes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="attendance_new.php">New Attendance</a></li>
+                <li class="nav-item"> <a class="nav-link" href="attendance_all.php">Attendance History</a></li>
               </ul>
             </div>
           </li>
@@ -207,7 +217,7 @@ $profile_photo = teacherData('profile_photo', $user_id);
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">All Students</a></li>
+                <li class="nav-item"> <a class="nav-link" href="students.php">All Students</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Search</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Results</a></li>
               </ul>
