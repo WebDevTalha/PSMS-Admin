@@ -208,8 +208,8 @@ $admin_name = admin('name',$user_id);
             </a>
             <div class="collapse" id="ui-6">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">Filter Routine</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Add New</a></li>
+                <li class="nav-item"> <a class="nav-link" href="routine_all.php">All Routine</a></li>
+                <li class="nav-item"> <a class="nav-link" href="routine_add_new.php">Add New</a></li>
               </ul>
             </div>
           </li>

@@ -69,6 +69,14 @@ function getSubjectName($id){
   $result = $stm->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['name']." - ".$result[0]['code'];
 }
+// GET Subject Name And Code
+function getSubjectTeacher($id){
+  global $pdo;
+  $stm = $pdo->prepare("SELECT teacher_id FROM assign_teachers WHERE subject_id=?");
+  $stm->execute(array($id));
+  $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+  return $result[0]['teacher_id'];
+}
 
 // Count any Column Value count from any Table
 function getCount($tbl,$col, $val) {
