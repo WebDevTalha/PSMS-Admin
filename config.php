@@ -69,6 +69,8 @@ function getSubjectName($id){
   $result = $stm->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['name']." - ".$result[0]['code'];
 }
+
+
 // GET Subject Name And Code
 function getSubjectTeacher($id){
   global $pdo;
@@ -77,6 +79,7 @@ function getSubjectTeacher($id){
   $result = $stm->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['teacher_id'];
 }
+
 
 // Count any Column Value count from any Table
 function getCount($tbl,$col, $val) {
@@ -99,6 +102,15 @@ function getColData($col,$tbl,$id){
 function getClassName($id,$col){
   global $pdo;
   $stm=$pdo->prepare("SELECT $col FROM class WHERE id=?");
+  $stm->execute(array($id));
+  $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+  return $result[0][$col];
+}
+
+// Get Teacher Info
+function getTeacherInfo($id,$col){
+  global $pdo;
+  $stm=$pdo->prepare("SELECT $col FROM teachers WHERE id=?");
   $stm->execute(array($id));
   $result = $stm->fetchAll(PDO::FETCH_ASSOC);
   return $result[0][$col];
