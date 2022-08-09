@@ -11,10 +11,23 @@ if(isset($_POST['submit_btn'])){
     }
     $exam_id = $_POST['select_exam'];
     
-    // Count Attendance
-    $stm=$pdo->prepare("SELECT * FROM exam_marks WHERE class_id=? AND subject_id=? AND teacher_id=? AND exam_id=?");
-    $stm->execute(array($class_id,$subject_id,$teacher_id,$exam_id));
-    $exCount = $stm->rowCount();
+    // Count Mark Submit
+    if($exam_id == 1){
+        $stm=$pdo->prepare("SELECT * FROM first_term_exam WHERE class_id=? AND subject_id=? AND teacher_id=? AND exam_id=?");
+        $stm->execute(array($class_id,$subject_id,$teacher_id,$exam_id));
+        $exCount = $stm->rowCount();
+    }
+    else if($exam_id == 2){
+        $stm=$pdo->prepare("SELECT * FROM second_term_exam WHERE class_id=? AND subject_id=? AND teacher_id=? AND exam_id=?");
+        $stm->execute(array($class_id,$subject_id,$teacher_id,$exam_id));
+        $exCount = $stm->rowCount();
+    }
+    else if($exam_id == 3){
+        $stm=$pdo->prepare("SELECT * FROM final_exam WHERE class_id=? AND subject_id=? AND teacher_id=? AND exam_id=?");
+        $stm->execute(array($class_id,$subject_id,$teacher_id,$exam_id));
+        $exCount = $stm->rowCount();
+    }
+   
     // by Default
     $studentCount = NULL;
   
@@ -25,10 +38,10 @@ if(isset($_POST['submit_btn'])){
         $error = "Select Subject is Required!";
     }
     else if(empty($exam_id)){
-        $error = "Select Exam!";
+        $error = "Select Exam is Required!";
     }
     
-    else if($exCount == 1){
+    else if($exCount != 0){
         $error = "Already Submit the Subject Marks!";
     }
     else{
@@ -40,37 +53,40 @@ if(isset($_POST['submit_btn'])){
 }
 
 
-if(isset($_POST['marks_submit'])){
+if(isset($_POST['mark_submit'])){
 
-    $student_id = $_POST['student_id'];
-    $student_name = $_POST['student_name'];
+    $student_id = $_POST['student_id']; 
     $marks = $_POST['marks'];
+
     
-    $length =  count($student_id);
-    $studentData = [];
-    for($i=0;$i<$length;$i++){
-        $studentData[$i]['id'] = $student_id[$i];
-        $studentData[$i]['name'] = $student_name[$i];
-        $studentData[$i]['marks'] = $marks[$i]; 
-    } 
-    // echo "<pre>";
-    // print_r($studentData);
-    // echo "</pre>"; 
-    $final_st_data = json_encode($studentData);
-     
     $class_id = $_POST['class_id'];
     $subject_id = $_POST['subject_id'];
     $exam_id = $_POST['exam_id'];
-
-    $insert = $pdo->prepare("INSERT INTO exam_marks(
-        teacher_id,
-        class_id,
-        subject_id,
-        exam_id,
-        student_data
-    ) VALUES(?,?,?,?,?)");
-
-    $insert->execute(array($teacher_id,$class_id,$subject_id,$exam_id,$final_st_data,));
+ 
+    $length =  count($student_id); 
+    if($exam_id == 1){
+        for($i=0;$i<$length;$i++){ 
+            $insert = $pdo->prepare("INSERT INTO first_term_exam(teacher_id,class_id,subject_id,exam_id,st_id,st_marks) VALUES(?,?,?,?,?,?)"); 
+            $insert->execute(array($teacher_id,$class_id,$subject_id,$exam_id,$student_id[$i],$marks[$i]));
+    
+        } 
+    }
+    else if($exam_id == 2){
+        for($i=0;$i<$length;$i++){ 
+            $insert = $pdo->prepare("INSERT INTO second_term_exam(teacher_id,class_id,subject_id,exam_id,st_id,st_marks) VALUES(?,?,?,?,?,?)"); 
+            $insert->execute(array($teacher_id,$class_id,$subject_id,$exam_id,$student_id[$i],$marks[$i]));
+    
+        } 
+    }
+    else if($exam_id == 3){
+        for($i=0;$i<$length;$i++){ 
+            $insert = $pdo->prepare("INSERT INTO final_exam(teacher_id,class_id,subject_id,exam_id,st_id,st_marks) VALUES(?,?,?,?,?,?)"); 
+            $insert->execute(array($teacher_id,$class_id,$subject_id,$exam_id,$student_id[$i],$marks[$i]));
+    
+        } 
+    }
+    
+ 
     $success = "Marks Submit Success!";
 
 }
@@ -83,7 +99,7 @@ if(isset($_POST['marks_submit'])){
     <span class="page-title-icon bg-gradient-primary text-white mr-2">
       <i class="mdi mdi-account"></i>                 
     </span>
-    Submit Exam Marks
+     Submit Exam Marks
   </h3> 
 </div>
 <div class="row">
@@ -136,26 +152,30 @@ if(isset($_POST['marks_submit'])){
                     </div> 
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group"> 
                         <label for="select_exam">Select Exam:</label>
-                        <select name="select_exam" id="select_exam" class="form-control">
-                            <option <?php 
+                        <select name="select_exam" id="select_exam" class="form-control"> 
+                            <option 
+                            <?php 
                             if(isset($_POST['select_exam']) AND $_POST['select_exam'] == 1){
                                 echo "selected";
                             }
-                            ?> value="1">1st Term Exam</option>
-
-                            <option <?php 
+                            ?>
+                            value="1">1st Term Exam</option>
+                            <option 
+                            <?php 
                             if(isset($_POST['select_exam']) AND $_POST['select_exam'] == 2){
                                 echo "selected";
                             }
-                            ?> value="2">Mid Term Exam</option>
-
-                            <option <?php 
+                            ?>
+                            value="2">2nd Term Exam</option>
+                            <option 
+                            <?php 
                             if(isset($_POST['select_exam']) AND $_POST['select_exam'] == 3){
                                 echo "selected";
                             }
-                            ?> value="3">Final Exam</option>
+                            ?>
+                            value="3">Final Exam</option>
                         </select>
                     </div> 
                 </div>
@@ -183,7 +203,7 @@ if(isset($_POST['marks_submit'])){
                     <tr>
                         <th>#</th>
                         <th>Student Name</th>
-                        <th>Student Mark</th>
+                        <th>Student Marks</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -195,15 +215,15 @@ if(isset($_POST['marks_submit'])){
                     <tr>
                         <td><?php echo $i;?></td>
                         <td><?php echo $newList['name'];?> 
-                        <input type="hidden" value="<?php echo $newList['id'];?>" name="student_id[]">
-                        <input type="hidden" value="<?php echo $newList['name'];?>" name="student_name[]">
+                        <input type="hidden" value="<?php echo $newList['id'];?>" name="student_id[]"> 
 
                         <input type="hidden" value="<?php echo $_POST['select_class'];?>" name="class_id">
                         <input type="hidden" value="<?php echo $_POST['select_subject'];?>" name="subject_id">
                         <input type="hidden" value="<?php echo $_POST['select_exam'];?>" name="exam_id">
 
-                    </td>
-                        <td><input class="form-control" type="number" name="marks[<?php echo $a;?>]"></td>
+                    </td> 
+                    <td> <input class="form-control" type="number" name="marks[<?php echo $a;?>]"></td>
+                       
                     </tr>
                     <?php $i++;$a++; endforeach;?>
                 </tbody>
@@ -211,7 +231,7 @@ if(isset($_POST['marks_submit'])){
             <br>
             <br>
             <div class="form-group">
-                <input type="submit" name="marks_submit" class="btn btn-success btn-sm" value="Submit Marks">
+                <input type="submit" name="mark_submit" class="btn btn-success btn-sm" value="Submit Marks">
             </div>
 
             </form>

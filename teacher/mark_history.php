@@ -1,6 +1,6 @@
 <?php require_once('header.php');
 $teacher_id = $_SESSION['teacher_loggedin'][0]['id'];
-
+ 
 if(isset($_POST['submit_btn'])){
     $class_id = $_POST['select_class'];
     if(isset($_POST['select_subject'])){
@@ -10,14 +10,26 @@ if(isset($_POST['submit_btn'])){
         $subject_id = '';
     }
     $select_exam = $_POST['select_exam'];
+    
+    if($select_exam == 1){
+        $stm=$pdo->prepare("SELECT * FROM first_term_exam WHERE class_id=? AND subject_id=? AND teacher_id=? AND exam_id=?");
+        $stm->execute(array($class_id,$subject_id,$teacher_id,$select_exam));
+        $exCount = $stm->rowCount();
+    }
+    else if($select_exam == 2){
+        $stm=$pdo->prepare("SELECT * FROM second_term_exam WHERE class_id=? AND subject_id=? AND teacher_id=? AND exam_id=?");
+        $stm->execute(array($class_id,$subject_id,$teacher_id,$select_exam));
+        $exCount = $stm->rowCount();
+    }
+    else if($select_exam == 3){
+        $stm=$pdo->prepare("SELECT * FROM final_exam WHERE class_id=? AND subject_id=? AND teacher_id=? AND exam_id=?");
+        $stm->execute(array($class_id,$subject_id,$teacher_id,$select_exam));
+        $exCount = $stm->rowCount();
+    }
 
-    // Count Attendance
-    $stm=$pdo->prepare("SELECT * FROM exam_marks WHERE class_id=? AND subject_id=? AND teacher_id=? AND exam_id=?");
-    $stm->execute(array($class_id,$subject_id,$teacher_id,$select_exam));
-    $attCount = $stm->rowCount();
     // by Default
     $studentCount = NULL;
-
+  
     if(empty($class_id)){
         $error = "Select Class is Required!";
     }
@@ -25,20 +37,35 @@ if(isset($_POST['submit_btn'])){
         $error = "Select Subject is Required!";
     }
     else if(empty($select_exam)){
-        $error = "Select Exam!";
+        $error = "Select Exam is Required!";
     }
-
-    else if($attCount != 1){
+    
+    else if($exCount == 0){
         $error = "Result not Found!";
     }
     else{
-        $stm=$pdo->prepare("SELECT * FROM exam_marks WHERE class_id=? AND subject_id=? AND exam_id=?");
-        $stm->execute(array($class_id,$subject_id,$select_exam));
-        $studentCount = $stm->rowCount();
-        $studentList = $stm->fetchAll(PDO::FETCH_ASSOC);  
+        if($select_exam == 1){
+            $stm=$pdo->prepare("SELECT * FROM first_term_exam WHERE class_id=? AND subject_id=? AND exam_id=?");
+            $stm->execute(array($class_id,$subject_id,$select_exam));
+            $studentCount = $stm->rowCount();
+            $studentList = $stm->fetchAll(PDO::FETCH_ASSOC);  
+        }
+        else if($select_exam == 2){
+            $stm=$pdo->prepare("SELECT * FROM second_term_exam WHERE class_id=? AND subject_id=? AND exam_id=?");
+            $stm->execute(array($class_id,$subject_id,$select_exam));
+            $studentCount = $stm->rowCount();
+            $studentList = $stm->fetchAll(PDO::FETCH_ASSOC);  
+        }
+        else if($select_exam == 3){
+            $stm=$pdo->prepare("SELECT * FROM final_exam WHERE class_id=? AND subject_id=? AND exam_id=?");
+            $stm->execute(array($class_id,$subject_id,$select_exam));
+            $studentCount = $stm->rowCount();
+            $studentList = $stm->fetchAll(PDO::FETCH_ASSOC);  
+        }
+        
     } 
 }
-
+  
 ?>
 <div class="page-header">
   <h3 class="page-title">
@@ -82,7 +109,7 @@ if(isset($_POST['submit_btn'])){
                             value="<?php echo $list['class_name'];?>"><?php echo getClassName($list['class_name'],'class_name');?></option>
                             <?php endforeach;?>
                         </select>
-
+                        
                     </div> 
                 </div>
                 <div class="col-md-3">
@@ -99,25 +126,29 @@ if(isset($_POST['submit_btn'])){
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="att_date">Select Date:</label>
-                        <select name="select_exam" id="select_exam" class="form-control">
-                            <option <?php 
+                        <label for="select_exam">Select Exam:</label>
+                        <select name="select_exam" id="select_exam" class="form-control"> 
+                            <option 
+                            <?php 
                             if(isset($_POST['select_exam']) AND $_POST['select_exam'] == 1){
                                 echo "selected";
                             }
-                            ?> value="1">1st Term Exam</option>
-
-                            <option <?php 
+                            ?>
+                            value="1">1st Term Exam</option>
+                            <option 
+                            <?php 
                             if(isset($_POST['select_exam']) AND $_POST['select_exam'] == 2){
                                 echo "selected";
                             }
-                            ?> value="2">Mid Term Exam</option>
-
-                            <option <?php 
+                            ?>
+                            value="2">2nd Term Exam</option>
+                            <option 
+                            <?php 
                             if(isset($_POST['select_exam']) AND $_POST['select_exam'] == 3){
                                 echo "selected";
                             }
-                            ?> value="3">Final Exam</option>
+                            ?>
+                            value="3">Final Exam</option>
                         </select>
                     </div> 
                 </div>
@@ -127,14 +158,14 @@ if(isset($_POST['submit_btn'])){
                     </div>
                 </div>
             </div>
-
+           
         </form>
     </div>
     </div>
 </div>
 
 <?php if(isset($_POST['submit_btn']) AND $studentCount != NULL) : ?>
-
+ 
 <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body"> 
@@ -143,21 +174,19 @@ if(isset($_POST['submit_btn'])){
                     <tr>
                         <th>#</th>
                         <th>Student Name</th> 
-                        <th>Marks</th>
+                        <th>Marks</th> 
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
-                        $i=1;  
-                        $stList = $studentList[0]['student_data'];
-                        $stList = json_decode($stList,true); 
-                        foreach($stList as $newList) :
-
+                        $i=1;   
+                        foreach($studentList as $newList) :
+ 
                     ?>
                     <tr>
                         <td><?php echo $i;?></td>
-                        <td><?php echo $newList['name'];?> </td> 
-                        <td><?php echo $newList['marks'];?> </td> 
+                        <td><?php echo Student('name',$newList['st_id']) ; ?> </td> 
+                        <td><?php echo $newList['st_marks'];?> </td>  
                     </tr>
                     <?php $i++; endforeach;?>
                 </tbody>
@@ -193,4 +222,4 @@ if(isset($_POST['submit_btn'])){
             }
         });  
     });
-</script> 
+</script>

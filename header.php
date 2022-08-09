@@ -292,6 +292,20 @@ $profile_photo = admin('profile_photo',$user_id);
           </li>
 
           <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-66" aria-expanded="false" aria-controls="ui-66">
+                <span class="menu-title">Students Marks</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                </a>
+                <div class="collapse" id="ui-66">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="student_marks.php">Students Marks</a></li>
+
+                </ul>
+                </div>
+            </li>
+
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-3" aria-expanded="false" aria-controls="ui-3">
               <span class="menu-title">Payments</span>
               <i class="menu-arrow"></i>
