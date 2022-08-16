@@ -1,0 +1,869 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body {
+    padding: 30px 10px;
+    background-color: #f7f7f7;
+}
+
+.container {
+    height: inherit;
+    text-align: center;
+    padding-right: 0px;
+    padding-left: 0px;
+    color: #fff;
+    border-radius: 2px;
+    background-color: #FFFFFF;
+    /***** Flex Property ******/
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    max-width: 575px;
+}
+
+.verticalCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.verticalCenterBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Re-branded Ui css*/
+#inputHolder {
+    display: flex;
+    flex-direction: column;
+    background-image: url('../images/input_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 269px;
+    align-items: center;
+    justify-content: center;
+    background-color: #c94161;
+}
+#loaderHolder {
+    display: flex;
+    align-items: center;
+    min-height: 356px;
+    background-image: url("../images/background.svg");
+    background-color: #e2136e;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    overflow: hidden;
+    padding: 5px;
+}
+#loaderImage{
+    width: 60px;
+    height: 70px;
+    margin-bottom: 24px;
+}
+
+#trxLoader {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 5px;
+    opacity: 1;
+    animation-name: fadeInRight;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 1.5s;
+
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(+150px);
+    }
+    60% {
+        opacity: .6;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+.loadingText {
+    color: #464646;
+    font-size: 20px;
+    font-style: italic;
+    flex-wrap: wrap;
+    font-family: 'Roboto', sans-serif;
+}
+
+div.buttonAction {
+    display: flex;
+    flex-direction: row;
+}
+
+.loader {
+    display: inline-block;
+    width: 100%;
+    background-color: #d1d3d4;
+    height: 60px;
+}
+
+.loader svg {
+    height: 100%;
+}
+
+.buttonAction button {
+    outline: none;
+    width: 50%;
+    height: 60px;
+    background-color: #d1d3d4;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    border-right: 1px solid #BCBCBC;
+    border-left: 0px solid #000000;
+    border-top: 0px solid #000000;
+    border-bottom: 0px solid #000000;
+    font-size: 16px;
+    margin: 0px;
+    line-height: 1.14;
+    text-align: center;
+    border-radius: 0px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+}
+
+#confirm_button {
+    color: #414042;
+}
+
+#close_button {
+    color: #ffffff;
+}
+
+#confirm_button > img, #close_button > img {
+    vertical-align: middle;
+}
+
+span.confirmText {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+span.infoText {
+    color: #F1D6E1;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    margin-top: 10px;
+    line-height: 1.14;
+    letter-spacing: normal;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+b.textButton {
+    cursor: pointer;
+}
+
+#error {
+    color: #fff;
+    font-weight: bold;
+    font-size: 13.5px;
+    margin-top: 10px;
+    font-family: sans-serif;
+}
+
+b.textButton {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    margin-top: 23px;
+    letter-spacing: normal;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+}
+
+input.form-control {
+    width: 80%;
+    border-radius: 2px;
+    height: 65px;
+    margin-top: 21px;
+    margin-bottom: 13px;
+}
+
+#title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: left;
+    color: #ffffff;
+}
+
+#details {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    text-align: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #ffffff;
+}
+
+#footerItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f7f7f7;
+    justify-content: center;
+    padding-top: 39px;
+}
+
+label.infoText {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #ffffff;
+}
+
+#credit {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-right: 10px;
+    align-items: center;
+}
+
+#dialText {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #e2136e;
+    margin-left: 10px;
+}
+
+#banner {
+    background-color: white;
+    padding: 20px 10px 20px 10px;
+    font-stretch: semi-condensed;
+    border-radius: 30px 30px 0 0;
+}
+
+.header {
+    min-height: 130px;
+    border-bottom: 5px solid #e2136e;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.header .logo img {
+    max-width: 80%;
+    width: 350px;
+}
+
+.bannerLogo {
+    width: 80%;
+}
+
+@media only screen and (min-width: 875px) {
+    #payment {
+        min-height: 190px;
+    }
+}
+
+label {
+    color: white;
+    font-size: 14px;
+}
+
+#form {
+    padding: 0px;
+}
+
+.form-item {
+    padding: 0px 15px 0px 15px;
+}
+
+#toc {
+    color: #fff;
+}
+
+a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #2abbe8;
+}
+
+@font-face {
+    font-family: 'fontello';
+    src: url('../pasword_bullet/fontello.eot?10593450');
+    src: url('../pasword_bullet/fontello.eot?10593450#iefix') format('embedded-opentype'),
+    url('../pasword_bullet/fontello.woff?10593450') format('woff'),
+    url('../pasword_bullet/fontello.ttf?10593450') format('truetype'),
+    url('../pasword_bullet/fontello.svg?10593450#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+input[type=password] {
+    font-family: 'fontello', 'Roboto', sans-serif !important;
+    letter-spacing: 5px !important;
+}
+
+input[type=text]::placeholder, input[type=password]::placeholder {
+    font-weight: normal;
+    letter-spacing: normal;
+}
+
+input[type=text]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder {
+    font-weight: normal;
+    letter-spacing: normal;
+}
+
+input[type=text], input[type=password] {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    text-align: center;
+    font-weight: 500;
+    color: #464646;
+}
+
+#message_container {
+    color: #fff;
+    min-height: 50px;
+    margin: 0 auto;
+
+}
+
+@media only screen and (min-width: 470px) {
+    #message_container {
+        min-height: 60px;
+    }
+}
+
+@media only screen and (min-width: 875px) {
+    #message_container {
+        min-height: 50px;
+    }
+}
+
+#footer {
+    color: #e0bcbc;
+    bottom: 0px;
+}
+
+#button_panel {
+    margin-bottom: 10px;
+}
+
+.processing {
+    opacity: 0.6;
+}
+
+#type {
+    font-size: 12px;
+    color: #fff;
+    padding-bottom: 20px;
+}
+
+[v-cloak] {
+    display: none
+}
+
+/*merchant info css*/
+.top {
+    min-height: 121px;
+    background-color: #ffffff;
+}
+
+.flex-logo {
+    display: flex;
+    display: -webkit-flex;
+    flex: .8;
+    margin-left: 10px;
+    justify-content: center;
+}
+
+.flex-amount {
+    flex: 2;
+    margin-right: 15px;
+}
+
+.flex-merchant {
+    flex: 3.2;
+}
+
+.loader img {
+    height: 60px;
+}
+
+.payment-box {
+    display: flex;
+    align-items: center;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.payment-box .avatar {
+    width: 45px;
+    height: 45px;
+    background-size: cover;
+    border-radius: 100px;
+    box-shadow: 0px 0px 1px 1px rgba(191, 181, 181, 1);
+}
+
+.payment-box .avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.payment-box .details {
+    text-align: left;
+    color: #464646;
+}
+
+.payment-box .details h4 {
+    line-height: 24px;
+    margin: 0;
+    word-break: break-word;
+    font-family: 'Roboto', sans-serif;
+    padding-right: 5px;
+}
+
+.payment-box .details p {
+    color: #B9B9B9;
+    line-height: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.p1 {
+    color: #B9B9B9;
+    line-height: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    overflow: hidden;
+    width: 160px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 0 0 55px;
+}
+
+.payment-box .amount {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.payment-box .amount b {
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: right;
+    color: #464646;
+}
+
+.payment-box .amount b1 {
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: right;
+    color: #464646;
+}
+
+.payment-box .amount b2 {
+    font-size: 32px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: right;
+    color: #464646;
+}
+
+.feedback-message {
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-align: center;
+    color: #ffffff;
+}
+
+/******** Responsive ********/
+@media only screen and (max-width: 580px) {
+    .flex-logo {
+        margin-left: 8px;
+    }
+
+    .flex-amount {
+        margin-right: 8px;
+    }
+
+    .payment-box .amount b {
+        font-size: 32px;
+    }
+
+    .payment-box .amount b1 {
+        font-size: 40px;
+    }
+
+    .payment-box .amount b2 {
+        font-size: 24.5px;
+    }
+
+    .payment-box .details h4 {
+        line-height: 20px;
+        font-size: 16px;
+    }
+
+    .payment-box .details p {
+        line-height: 20px;
+        font-size: 15px;
+    }
+
+    .p1 {
+        line-height: 20px;
+        font-size: 15px;
+        margin: 0 0 0 50px;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .feedback-message {
+        font-size: 16px;
+    }
+    .flex-logo {
+        margin-left: 7px;
+    }
+
+    .flex-amount {
+        margin-right: 7px;
+    }
+
+    .payment-box .amount b {
+        font-size: 30px;
+    }
+
+    .payment-box .amount b1 {
+        font-size: 38px;
+    }
+
+    .payment-box .amount b2 {
+        font-size: 22px;
+    }
+
+    .payment-box .details h4 {
+        line-height: 18px;
+        font-size: 14px;
+    }
+
+
+    .payment-box .details p {
+        font-size: 13px;
+    }
+
+    .p1 {
+        line-height: 18px;
+        font-size: 13px;
+        margin: 0 0 0 40px;
+        width: 145px;
+    }
+
+    .payment-box .avatar {
+        width: 38px;
+        height: 38px;
+    }
+
+}
+
+@media only screen and (max-width: 450px) {
+
+    #title {
+        font-size: 22px;
+    }
+
+    #details {
+        font-size: 17px;
+    }
+
+    span.infoText {
+        font-size: 12px;
+    }
+
+    label.infoText {
+        font-size: 16px;
+    }
+
+    #close_button, #confirm_button {
+        font-size: 16px;
+    }
+
+    input[type=text], input[type=password] {
+        font-size: 18px;
+    }
+
+    .payment-box .amount b {
+        font-size: 27px;
+    }
+
+    .payment-box .amount b1 {
+        font-size: 35px;
+    }
+
+    .payment-box .amount b2 {
+        font-size: 20.5px;
+    }
+
+}
+
+@media only screen and (max-width: 390px) {
+    .feedback-message {
+        font-size: 14px;
+    }
+
+    input[type=text], input[type=password] {
+        font-size: 17px;
+    }
+
+    .flex-logo {
+        margin-left: 5px;
+    }
+
+    .flex-amount {
+        margin-right: 5px;
+    }
+
+    .payment-box .amount b {
+        font-size: 24px;
+    }
+
+    .payment-box .amount b1 {
+        font-size: 30px;
+    }
+
+    .payment-box .amount b2 {
+        font-size: 17px;
+    }
+
+    .payment-box .details p {
+        font-size: 12px;
+    }
+
+    .p1 {
+        line-height: 18px;
+        font-size: 12px;
+        margin: 0 0 0 35px;
+        width: 130px;
+    }
+
+    .payment-box .avatar {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    #title {
+        font-size: 19px;
+    }
+
+    #details {
+        font-size: 15px;
+    }
+
+    label.infoText {
+        font-size: 15px;
+    }
+
+    .flex-logo {
+        margin-left: 3px;
+    }
+
+    .flex-amount {
+        margin-right: 3px;
+    }
+
+    .payment-box .amount b {
+        font-size: 19px;
+    }
+    .payment-box .details h4 {
+        line-height: 16px;
+        font-size: 12px;
+    }
+
+    .payment-box .amount b1 {
+        font-size: 23px;
+    }
+
+    .payment-box .amount b2 {
+        font-size: 16px;
+    }
+
+    .payment-box .details p {
+        font-size: 11px;
+    }
+
+    .p1 {
+        line-height: 14px;
+        font-size: 11px;
+        margin: 0 0 0 35px;
+        width: 120px;
+    }
+
+    .payment-box .avatar {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    #close_button, #confirm_button {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .header {
+        min-height: 110px;
+    }
+
+    .top {
+        min-height: 111px;
+    }
+
+    #inputHolder {
+        height: 230px;
+    }
+
+    input.form-control {
+        height: 50px;
+        margin-top: 15px;
+        margin-bottom: 13px;
+    }
+
+    #footerItem {
+        padding-top: 20px;
+    }
+
+    .loadingText {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-height: 799px) {
+    body {
+        padding: 20px 10px;
+    }
+}
+
+@media only screen and (max-height: 699px) {
+    .container {
+        max-width: 500px;
+    }
+
+    .header {
+        min-height: 100px;
+    }
+
+    .header .logo img {
+        width: 300px;
+    }
+
+    .top {
+        min-height: 100px;
+    }
+
+    #inputHolder {
+        height: 250px;
+    }
+
+    #footerItem {
+        padding-top: 29px;
+    }
+    .loadingText {
+        font-size: 15px;
+    }
+}

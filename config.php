@@ -143,3 +143,18 @@ function getTeacherInfo($id,$col){
   $result = $stm->fetchAll(PDO::FETCH_ASSOC);
   return $result[0][$col];
 }
+
+// Hide Email With Star *
+function emailHide($email){
+  $string = $email;
+  preg_match('/^.\K[a-zA-Z\.0-9]+(?=.@)/',$string,$matches);//here we are gathering this part bced
+
+  $replacement= implode("",array_fill(0,strlen($matches[0]),"*"));//creating no. of *'s
+  return preg_replace('/^(.)'.preg_quote($matches[0])."/", '$1'.$replacement, $string);
+}
+
+// Hide Mobile With Star *
+function hideMobile($phone){
+  $phone;
+  return substr($phone, 0, 3) . "** ***" . substr($phone, 8, 3);
+}

@@ -313,8 +313,9 @@ $profile_photo = admin('profile_photo',$user_id);
             </a>
             <div class="collapse" id="ui-3">
               <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="teacher_payment.php">Teacher Payment</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Teacher Payment History</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Student Payments</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Teacher Payments</a></li>
               </ul>
             </div>
           </li>

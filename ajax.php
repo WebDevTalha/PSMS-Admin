@@ -46,3 +46,80 @@ if(isset($_POST['att_class_id'])){
     echo $get_subject_options ;
 
 }
+
+
+
+// Get Bkash Number Amount
+$teacher_id = $_POST['teacher_id'];
+
+$stm5 = $pdo->prepare("SELECT * FROM teachers WHERE id=?");
+$stm5->execute(array($teacher_id));
+$teacher_list = $stm5->fetchAll(PDO::FETCH_ASSOC);
+if(isset($_POST['amount'])) : ?>
+<div class="row">
+       <div class="col-lg-8 grid-margin stretch-card offset-md-2">
+           <!-- preloader -->
+            <div class="preloader-bg" id="preloader-bg">
+               <div class="center">
+               <div class="bouncywrap">
+                     
+                     <div class="dotcon dc1">
+                     <div class="dot"></div>
+                     </div>
+                  
+                     <div class="dotcon dc2">
+                     <div class="dot"></div>
+                     </div>
+                  
+                     <div class="dotcon dc3">
+                     <div class="dot"></div>
+                     </div>
+               
+               </div>
+               </div>
+            </div>
+           <div class="card">
+               <div class="card-body">
+                  <div class="wrapper">
+                     <div class="bkash-logo text-center">
+                        <img src="images/bkash_payment.png" alt="Bkash" class="w-50">
+                     </div>
+                     <!-- price -->
+                     <div class="invoice-n-price">
+                        <div class="row align-items-center mb-3">
+                           <div class="col-md-6">
+                              <div class="invoice">
+                                 <div class="web-logo">
+                                    <img src="images/psms.png" alt="PSMS" class="rounded">
+                                 </div>
+                                 <div class="invoice-content">
+                                    <p>PSMS</p>
+                                    <p>Teacher Name: <?php echo $teacher_list[0]['name']; ?></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="price">
+                              <p>৳ <?php echo $_POST['amount']; ?>.00</p>
+                              </div>
+                           </div>
+                        </div>
+                        <form class="payment-form" action="" method="POST">
+                           <p>Teacher Bkash Account Number (<?php echo hideMobile($teacher_list[0]['mobile']); ?>)</p>
+                           <input type="password" name="pin" placeholder="Enter Your Password">
+                           <input type="hidden" name="salary_amount" value="<?php echo $_POST['amount']; ?>">
+                           <div class="b-buttons">
+                              <a href="teacher_payment.php">Close</a>
+                              <button name="submit_btn" type="submit">Confirm</button>
+                           </div>
+                        </form>
+                        <div class="call-btn">
+                           <a href="tel:16247"><i class="fa-solid fa-phone"></i> 16247</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+           </div>
+       </div>
+   </div>
+<?php endif; ?>
