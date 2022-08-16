@@ -119,57 +119,81 @@ $profile_photo = admin('profile_photo',$user_id);
               <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
             </a>
           </li>
+          <?php
+          $stm=$pdo->prepare("SELECT * FROM notification WHERE status=?");
+          $stm->execute(array(0));
+          $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+          ?>
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i class="mdi mdi-bell-outline"></i>
+              <?php if(!empty($result)) :?>
               <span class="count-symbol bg-danger"></span>
+              <?php endif; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
               <h6 class="p-3 mb-0">Notifications</h6>
               <div class="dropdown-divider"></div>
+              
+              <?php if(empty($result)) :?>
+                <a class="dropdown-item preview-item btn">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="mdi mdi-sync-alert"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <p class="text-gray ellipsis mb-0">
+                    No Notifications Here
+                  </p>
+                </div>
+              </a>
+              <?php endif;?>
+              <?php foreach($result as $row) :?>
+              
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <div class="preview-icon bg-success">
-                    <i class="mdi mdi-calendar"></i>
+                    <?php if($row['type'] == "t_pay") :?>
+                    <i class="mdi mdi-cash-usd"></i>
+                    <?php elseif($row['type'] == "st_pay") :?>
+                    <i class="mdi mdi-cash-usd"></i>
+                    <?php elseif($row['type'] == "reg") :?>
+                    <i class="mdi mdi-account"></i>
+                    <?php endif; ?>
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
+                  <h6 class="preview-subject font-weight-normal mb-1"><?php 
+                  if($row['type'] == "t_pay"){
+                    echo getTeacherInfo($row['teacher_id'],'name');
+                  }
+                  else if($row['type'] == "st_pay"){
+                    echo student('name',$row['st_id']);
+                  }
+                  else if($row['type'] == "reg"){
+                    echo $row['reg_name'];
+                  }
+                  
+                  ?></h6>
                   <p class="text-gray ellipsis mb-0">
-                    Just a reminder that you have an event today
+                    <?php 
+                    if($row['type'] == "t_pay"){
+                      echo "Received ৳".number_format(getTeacherInfo($row['teacher_id'],'last_amount'))." Taka At ".$row['created_at'];
+                    }
+                    else if($row['type'] == "st_pay"){
+                      echo "Send ৳".number_format(student('last_amount',$row['st_id']))." Taka At ".$row['created_at'];
+                    }
+                    else if($row['type'] == "reg"){
+                      echo "Has Created His Account!";
+                    }
+                    ?>
                   </p>
                 </div>
               </a>
+              <?php endforeach; ?>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-warning">
-                    <i class="mdi mdi-settings"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-                  <p class="text-gray ellipsis mb-0">
-                    Update dashboard
-                  </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-info">
-                    <i class="mdi mdi-link-variant"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-                  <p class="text-gray ellipsis mb-0">
-                    New admin wow!
-                  </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <h6 class="p-3 mb-0 text-center">See all notifications</h6>
             </div>
           </li>
           <li class="nav-item nav-logout d-none d-lg-block" title="Logout">
