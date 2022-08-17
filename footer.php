@@ -30,6 +30,31 @@
   <script src="js/dashboard.js"></script>
   <!-- End custom js for this page-->
   <script src="js/jquery.data_tables.min.js"></script>
+
+<script>
+  
+<?php $i=1; foreach($result as $row2) :?>
+$('#notification_reload').click(function(){
+    let notify_<?php echo $i; ?> = $('#id_<?php echo $i; ?>').val();  
+    
+    // console.log(amount);
+    $.ajax({
+        type: "POST",
+        url:'ajax.php',
+        data: {
+          notify_<?php echo $i; ?> : notify_<?php echo $i; ?>,
+        },
+        success:function(response){
+            let data = response;
+            console.log(data);
+            $('.notifyRemo').removeClass();
+        }
+    });  
+});
+
+<?php $i++; endforeach; ?>
+</script>
+
 </body>
 
 </html>

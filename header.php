@@ -125,11 +125,18 @@ $profile_photo = admin('profile_photo',$user_id);
           $result = $stm->fetchAll(PDO::FETCH_ASSOC);
 
           ?>
-          <li class="nav-item dropdown">
+          <script>
+          setInterval(myTimer, 1000);
+
+          function myTimer() {
+            document.getElementById("notification_reload");
+          }
+          </script>
+          <li class="nav-item dropdown" id="notification_reload">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i class="mdi mdi-bell-outline"></i>
               <?php if(!empty($result)) :?>
-              <span class="count-symbol bg-danger"></span>
+              <span class="count-symbol bg-danger notifyRemo"></span>
               <?php endif; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
@@ -150,7 +157,9 @@ $profile_photo = admin('profile_photo',$user_id);
                 </div>
               </a>
               <?php endif;?>
-              <?php foreach($result as $row) :?>
+              <?php $i=1; foreach($result as $row) :?>
+
+                <input type="hidden" name="id" id="id_<?php echo $i; $i++; ?>" value="<?php echo $row['id']; ?>">
               
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
@@ -287,8 +296,6 @@ $profile_photo = admin('profile_photo',$user_id);
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="student_all.php">All Students</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Search</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Results</a></li>
               </ul>
             </div>
           </li>
@@ -338,8 +345,8 @@ $profile_photo = admin('profile_photo',$user_id);
             <div class="collapse" id="ui-3">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="teacher_payment.php">Teacher Payment</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Teacher Payment History</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Student Payments</a></li>
+                <li class="nav-item"> <a class="nav-link" href="teacher_payment_history.php">Teacher Payment History</a></li>
+                <li class="nav-item"> <a class="nav-link" href="student_payment_history.php">Student Payments</a></li>
               </ul>
             </div>
           </li>

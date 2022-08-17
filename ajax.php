@@ -49,13 +49,16 @@ if(isset($_POST['att_class_id'])){
 
 
 
+
+if(isset($_POST['amount'])) : ?>
+<?php
 // Get Bkash Number Amount
 $teacher_id = $_POST['teacher_id'];
 
 $stm5 = $pdo->prepare("SELECT * FROM teachers WHERE id=?");
 $stm5->execute(array($teacher_id));
 $teacher_list = $stm5->fetchAll(PDO::FETCH_ASSOC);
-if(isset($_POST['amount'])) : ?>
+?>
 <div class="row">
        <div class="col-lg-8 grid-margin stretch-card offset-md-2">
            <!-- preloader -->
@@ -123,3 +126,24 @@ if(isset($_POST['amount'])) : ?>
        </div>
    </div>
 <?php endif; ?>
+
+<?php
+
+
+$i = 1;
+$stm5=$pdo->prepare("SELECT * FROM notification WHERE status=?");
+$stm5->execute(array(0));
+$result = $stm5->fetchAll(PDO::FETCH_ASSOC);
+
+// notification
+foreach($result as $row3){
+   if(isset($_POST['notify_'.$i])){
+      $stm = $pdo->prepare("UPDATE notification SET status = ? WHERE id = ?");
+      $stm->execute(array(1,$row3['id']));
+   }
+   $i++;
+}
+
+
+
+?>
