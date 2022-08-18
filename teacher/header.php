@@ -32,6 +32,27 @@ $profile_photo = teacherData('profile_photo', $user_id);
   <link rel="stylesheet" href="../css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/favicon.png" />
+  <style>
+    .text-animate{
+      color: #1bcfb4;
+      font-weight: 600;
+      animation: cAnimate 2s linear infinite;
+    }
+    @keyframes cAnimate {
+      0%{
+        color: #000;
+      }
+      40%{
+        color: #1bcfb4;
+      }
+      60%{
+        color: #1bcfb4;
+      }
+      100%{
+        color: #000;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container-scroller">
@@ -43,6 +64,19 @@ $profile_photo = teacherData('profile_photo', $user_id);
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <ul class="navbar-nav navbar-nav-right">
+          <?php
+          $stm6=$pdo->prepare("SELECT * FROM teachers WHERE id=?");
+          $stm6->execute(array($user_id));
+          $result6 = $stm6->fetchAll(PDO::FETCH_ASSOC);
+
+          ?>
+          <li class="nav-item">
+            <p class="m-0 text-black fw-bolder fs-2 text-animate">Last Salary <span>৳ <?php if($result6[0]['last_amount'] != null){
+              echo number_format($result6[0]['last_amount']);
+            } else {
+              echo "0";
+            } ?></span> BDT.</p>
+          </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <div class="nav-profile-img">
@@ -78,57 +112,78 @@ $profile_photo = teacherData('profile_photo', $user_id);
               <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
             </a>
           </li>
-          <li class="nav-item dropdown">
+          <?php
+          $stm=$pdo->prepare("SELECT * FROM notification WHERE t_status=?");
+          $stm->execute(array(0));
+          $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+          ?>
+          <script>
+          setInterval(myTimer, 1000);
+
+          function myTimer() {
+            document.getElementById("notification_reload");
+          }
+          </script>
+          <li class="nav-item dropdown" id="notification_reload">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i class="mdi mdi-bell-outline"></i>
-              <span class="count-symbol bg-danger"></span>
+              <?php if(!empty($result)) :?>
+              <span class="count-symbol bg-danger notifyRemo"></span>
+              <?php endif; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
               <h6 class="p-3 mb-0">Notifications</h6>
               <div class="dropdown-divider"></div>
+              
+              <?php if(empty($result)) :?>
+                <a class="dropdown-item preview-item btn">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="mdi mdi-sync-alert"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <p class="text-gray ellipsis mb-0">
+                    No Notifications Here
+                  </p>
+                </div>
+              </a>
+              <?php endif;?>
+              <?php $i=1; foreach($result as $row) :?>
+
+                <input type="hidden" name="id" id="id_<?php echo $i; $i++; ?>" value="<?php echo $row['id']; ?>">
+              
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <div class="preview-icon bg-success">
-                    <i class="mdi mdi-calendar"></i>
+                    <?php if($row['type'] == "t_pay") :?>
+                    <i class="mdi mdi-cash-usd"></i>
+                    <?php elseif($row['type'] == "st_pay") :?>
+                    <i class="mdi mdi-cash-usd"></i>
+                    <?php elseif($row['type'] == "reg") :?>
+                    <i class="mdi mdi-account"></i>
+                    <?php endif; ?>
                   </div>
                 </div>
                 <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
+                  <h6 class="preview-subject font-weight-normal mb-1"><?php 
+                  if($row['type'] == "t_pay"){
+                    echo "Congress ".getTeacherInfo($row['teacher_id'],'name');
+                  }
+                  
+                  ?></h6>
                   <p class="text-gray ellipsis mb-0">
-                    Just a reminder that you have an event today
+                    <?php 
+                    if($row['type'] == "t_pay"){
+                      echo "You Have Received ৳".number_format(getTeacherInfo($row['teacher_id'],'last_amount'))." Taka From Admin At ".$row['created_at'];
+                    }
+                    ?>
                   </p>
                 </div>
               </a>
+              <?php endforeach; ?>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-warning">
-                    <i class="mdi mdi-settings"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-                  <p class="text-gray ellipsis mb-0">
-                    Update dashboard
-                  </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-info">
-                    <i class="mdi mdi-link-variant"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-                  <p class="text-gray ellipsis mb-0">
-                    New admin wow!
-                  </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <h6 class="p-3 mb-0 text-center">See all notifications</h6>
             </div>
           </li>
           <li class="nav-item nav-logout d-none d-lg-block" title="Logout">
@@ -232,8 +287,6 @@ $profile_photo = teacherData('profile_photo', $user_id);
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="students.php">All Students</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Search</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Results</a></li>
               </ul>
             </div>
           </li>

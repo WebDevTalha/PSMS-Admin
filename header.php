@@ -125,13 +125,6 @@ $profile_photo = admin('profile_photo',$user_id);
           $result = $stm->fetchAll(PDO::FETCH_ASSOC);
 
           ?>
-          <script>
-          setInterval(myTimer, 1000);
-
-          function myTimer() {
-            document.getElementById("notification_reload");
-          }
-          </script>
           <li class="nav-item dropdown" id="notification_reload">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i class="mdi mdi-bell-outline"></i>

@@ -31,6 +31,8 @@
   <!-- End custom js for this page-->
   <script src="js/jquery.data_tables.min.js"></script>
 
+
+
 <script>
   
 <?php $i=1; foreach($result as $row2) :?>
@@ -53,6 +55,15 @@ $('#notification_reload').click(function(){
 });
 
 <?php $i++; endforeach; ?>
+</script>
+
+  
+<script>
+// $(document).ready(function () {
+//   setInterval(function () {
+//       $('#notification_reload').load('#notification_reload');
+//   }, 3000);
+// });
 </script>
 
 </body>

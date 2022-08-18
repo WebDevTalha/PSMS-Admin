@@ -416,9 +416,10 @@ if(isset($_POST['submit_btn'])){
 
       $insert2 = $pdo->prepare("INSERT INTO notification(
         type,
-        teacher_id
-      ) VALUES(?,?)");
-      $insert2->execute(array("t_pay",$teacher_id));
+        teacher_id,
+        t_status
+      ) VALUES(?,?,?)");
+      $insert2->execute(array("t_pay",$teacher_id,0));
   
       echo "<script>
       swal({
